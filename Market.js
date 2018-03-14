@@ -89,7 +89,10 @@ var emitter = new event();
 // });
 
 emitter.on('revisit', function() {
-  
+  customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
+  read.setPrompt(customer.checkOutMessage);
+  read.prompt();
+  process.exit();
 });
 
 function products(offer) {
@@ -98,17 +101,17 @@ function products(offer) {
           case 1:
             customer.order = "Rice";
             customer.bill = foodStockPrices.rice;
-            read.close();
+            emitter.emit('revisit');
             break;
           case 2:
             customer.order = "Flour";
             customer.bill = foodStockPrices.flour;
-            read.close();
+            emitter.emit('revisit');
             break;
           case 3:
             customer.order = "Beans";
             customer.bill = foodStockPrices.beans;
-            read.close();
+            emitter.emit('revisit');
             break;
           default:
             console.log(`\n${customer.name}, that was a wrong input. Please try again.\n`);
@@ -179,9 +182,6 @@ read.on('close', () => {
       read.prompt();
       process.exit();
     }
-
-    console.log(`you wrote ${answer}`)
-
   });
 });
 
