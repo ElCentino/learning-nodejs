@@ -90,9 +90,33 @@ var emitter = new event();
 
 emitter.on('revisit', function() {
   customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
-  read.setPrompt(customer.checkOutMessage);
-  read.prompt();
-  process.exit();
+  console.log(customer.checkOutMessage);
+
+  emitter.emit('done');
+});
+
+emitter.on('done', function() {
+  let resetName = false;
+
+  read.question(`\n${customer.name} Would you like a buy something else\n`, answer => {
+    if(!isNaN(Number(answer)) && answer == 1) {
+      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
+      read.setPrompt(customer.checkOutMessage);
+      read.prompt();
+      console.log(`\nCreating new Session for : ${customer.name}\n`);
+
+      store(function() {
+        customer.checkedIn = false;
+      }, resetName);
+
+    } else {
+      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
+      read.setPrompt(customer.checkOutMessage);
+      read.prompt();
+      read.close();
+      process.exit();
+    }
+  });
 });
 
 function products(offer) {
@@ -162,27 +186,7 @@ function store(callback = "", resetName = "") {
 }
 
 read.on('close', () => {
-
-  let resetName = false;
-
-  read.question(`\n${customer.name} Would you like a buy something else\n`, answer => {
-    if(!isNaN(Number(answer)) && answer == 1) {
-      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
-      read.setPrompt(customer.checkOutMessage);
-      read.prompt();
-      console.log(`\nCreating new Session for : ${customer.name}\n`);
-
-      store(function() {
-        customer.checkedIn = false;
-      }, true);
-
-    } else {
-      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
-      read.setPrompt(customer.checkOutMessage);
-      read.prompt();
-      process.exit();
-    }
-  });
+  
 });
 
 store(true);
