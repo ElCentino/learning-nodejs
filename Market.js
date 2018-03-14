@@ -101,22 +101,19 @@ emitter.on('done', function() {
   read.question(`\n${customer.name} Would you like a buy something else\n`, answer => {
     if(!isNaN(Number(answer)) && answer == 1) {
 
-      customer.checkedIn = false;
-      
-      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
-      read.setPrompt(customer.checkOutMessage);
-      read.prompt();
-      console.log(`\nCreating new Session for : ${customer.name}\n`);
-
       store(function() {
+
         customer.checkedIn = false;
+
+        customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
+        console.log(customer.checkOutMessage);
+        console.log(`\nCreating new Session for : ${customer.name}\n`);
+
       }, resetName);
 
     } else {
-      customer.checkOutMessage = `\n${customer.name}, You have orderd ${customer.order} and your bill is $${customer.bill}\n`;
-      read.setPrompt(customer.checkOutMessage);
+      read.setPrompt(`Wrong Input`);
       read.prompt();
-      process.exit();
     }
   });
 });
@@ -162,7 +159,7 @@ function store(callback = "", resetName = "") {
       read.on('line', answer => {
         if(!isNaN(Number(answer)) && customer.checkedIn == false) {
           products(answer);
-          customer.checkedIn = true;
+          //customer.checkedIn = true;
         } else {
           console.log(`Wrong input ${customer.name}, Please try again`);
         }
