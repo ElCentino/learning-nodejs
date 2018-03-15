@@ -56,6 +56,21 @@ var server = http.createServer(function(req, res) {
               z-index: 100;
             }
 
+            nav {
+              font-weight: bold;
+              font-size: 20px;
+            }
+
+            nav ul li {
+              display: inline-block;
+              margin: 20px;
+            }
+
+            nav ul li a {
+              text-decoration: none;
+              color: #000;
+            }
+
             .clear {
               clear: both;
             }
@@ -85,7 +100,8 @@ var server = http.createServer(function(req, res) {
               float: right;
               width: 22%;
               height: auto;
-              margin-top: 100px;
+
+              margin: 100px, 50xp;
             }
 
             #wrapper {
@@ -99,7 +115,15 @@ var server = http.createServer(function(req, res) {
         </head>
         <body>
           <header>
-
+            <nav class="menu">
+              <ul>
+                <li><a href='#'>Home</a></li>
+                <li><a href='#'>About</a></li>
+                <li><a href='#'>Products</a></li>
+                <li><a href='#'>Pricing</a></li>
+                <li><a href='#'>Contacts</a></li>
+              </ul>
+            </nav>
           </header>
           <div id="wrapper">
             <section id="left">
