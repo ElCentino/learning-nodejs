@@ -1,7 +1,6 @@
 var fileReader = require('./file-reader');
 var fs = require('fs');
 var http = require('http');
-var path = require('path');
 
 var filePath = fileReader.getFileArg("--file");
 var port = Number(fileReader.getFileArg("--port"));
