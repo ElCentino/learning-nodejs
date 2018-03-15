@@ -22,3 +22,10 @@ fs.readFile(filePath, "UTF-8", function(err, data) {
 process.on('exit', function() {
   console.log(`Done`);
 });
+
+module.exports = {
+  getFileArg : function(e) {
+    var index = process.argv.indexOf(e);
+    return (index === -1) ? null : process.argv[index + 1];
+  }
+};
