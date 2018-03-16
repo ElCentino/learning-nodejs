@@ -5,9 +5,7 @@ var path = require('path');
 
 var filePath = fileReader.getFileArg("--file");
 var port = Number(fileReader.getFileArg("--port"));
-
 var index =  filePath.lastIndexOf("/");
-
 var targetFolder = filePath.substring(0, index);
 
 let moreFiles = [];
