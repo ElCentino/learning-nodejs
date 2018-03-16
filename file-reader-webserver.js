@@ -16,7 +16,7 @@ var list = [];
 
 function serverSide() {
 
-  fs.readdir(targetFolder, function(err, files){
+  fs.readdir(targetFolder, function(err, files) {
     for(fileName of files) {
       if(err) {
         console.log("Folder does not exist");
@@ -210,18 +210,18 @@ function serverSide() {
 
 serverSide();
 
-
-
-function loadFile(e) {
+function getData(e) {
 
 }
 
 function listFiles() {
+
   for(var i = 0; i < moreFiles.length; i++) {
-    var onePath = targetFolder + "/" + moreFiles[i];
+    var onePath = "localhost/" +targetFolder + "/" + moreFiles[i];
     if(typeof moreFiles[i] == undefined) {
       continue;
     }
+
     list[i] = `<li><a href="${onePath}">${moreFiles[i]}</a></li>`;
   }
 }
