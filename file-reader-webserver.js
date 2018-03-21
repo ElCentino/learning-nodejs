@@ -3,8 +3,8 @@ var fs = require('fs');
 var http = require('http');
 var path = require('path');
 
-var filePath = fileReader.getFileArg("--file");
-var port = Number(fileReader.getFileArg("--port"));
+var filePath = fileReader.getFileArgs("--file");
+var port = Number(fileReader.getFileArgs("--port"));
 var index =  filePath.lastIndexOf("/");
 var targetFolder = filePath.substring(0, index);
 

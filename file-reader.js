@@ -24,9 +24,8 @@ process.on('exit', function() {
   console.log(`Done`);
 });
 
-module.exports = {
-  getFileArg : function(e) {
-    var index = process.argv.indexOf(e);
-    return (index === -1) ? null : process.argv[index + 1];
-  }
+
+exports.getArg = function(args) {
+  var index = process.argv.indexOf(args);
+  return (index === -1) ? null : process.argv[index + 1];
 };
