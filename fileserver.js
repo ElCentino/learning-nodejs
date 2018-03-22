@@ -27,7 +27,7 @@ function getFiles() {
       var fileStat = fs.statSync(file);
 
       console.log(file);
-      list += `<li><img src="${file}" alt="${fileName}"/></li>`;
+      list += "<li><img src="+ file +" alt=" + fileName + "/></li>\n";
 
       if(fileStat.isFile() && file.endsWith(".png")) {
 
